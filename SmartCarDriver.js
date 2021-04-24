@@ -1,6 +1,7 @@
 // 在树莓派上，启动SmartCarDriver。 建议加入系统自启动。 需要用root权限，或者把pi用户加入到gpio用户组。
 
 const ezPWM = require('ezpwmforraspberry');
+const rpio = require('rpio');
 const SBUSUART = require('sbusuart')
 const SBUS = new SBUSUART();
 const PWM = new ezPWM();
@@ -27,11 +28,84 @@ class SmartCarDriver {
             // 通道7:SW3;       打开关闭GPS
             // 通道8:SW4;       打开关闭啥？
             // 通道9:RV左;      云台左右
-            // 通道10:RV右;     云台上下
+            // 通道10:RV右;     云台上下 
             console.log('油门', status, channels[2], channels_c[2]);
 
-
+            _processSpeedAndDirection(status, channels[2], channels_c[2]);
+            
         });
+    }
+
+    _processSpeedAndDirection(status, channel_origin, channel_convert){
+        if(status==0){
+            const channel_convert_fixed = channel_convert.toFixed(2);
+            const diff = channel_convert_fixed - 0.5;
+            const diff_abs = Math.abs(diff);
+            if(diff_abs>0.1){
+                // 控制速度
+                if(diff_abs > 0.5){
+                    diff_abs = 0.5;
+                }
+                PWM.updatePWMByPercent(ezPWM.PWMPin.PIN12,diff_abs*2*100);
+
+                // 控制方向
+                if(diff>0){
+                    console.log('向前');
+                    // 向前开
+                    //左后轮向前
+                    // console.log('open 13 AIN1')
+                    // console.log('open 11 AIN2')
+                    rpio.open(13, rpio.OUTPUT, rpio.HIGH); // AIN1 HIGH
+                    rpio.open(11, rpio.OUTPUT, rpio.LOW);  // AIN2 LOW
+
+                    //右后轮向前
+                    // console.log('open 15 AIN1')
+                    // console.log('open 16 AIN2')
+                    rpio.open(15, rpio.OUTPUT, rpio.HIGH); // AIN1 HIGH
+                    rpio.open(16, rpio.OUTPUT, rpio.LOW);  // AIN2 LOW
+
+                    //右前轮向前
+                    // console.log('open 22 AIN1')
+                    // console.log('open 18 AIN2')
+                    rpio.open(18, rpio.OUTPUT, rpio.HIGH); // AIN1 HIGH
+                    rpio.open(22, rpio.OUTPUT, rpio.LOW);  // AIN2 LOW
+
+                    //左前轮向前
+                    // console.log('open 29 AIN1')
+                    // console.log('open 31 AIN2')
+                    rpio.open(31, rpio.OUTPUT, rpio.HIGH); // AIN1 HIGH
+                    rpio.open(29, rpio.OUTPUT, rpio.LOW);  // AIN2 LOW
+                }else{
+                    console.log('向后');
+                    // 向后开
+                    //左后轮向后
+                    // console.log('open 13 AIN1')
+                    // console.log('open 11 AIN2')
+                    rpio.open(13, rpio.OUTPUT, rpio.LOW); // AIN1 HIGH
+                    rpio.open(11, rpio.OUTPUT, rpio.HIGH);  // AIN2 LOW
+
+                    //右后轮向后
+                    // console.log('open 15 AIN1')
+                    // console.log('open 16 AIN2')
+                    rpio.open(15, rpio.OUTPUT, rpio.LOW); // AIN1 HIGH
+                    rpio.open(16, rpio.OUTPUT, rpio.HIGH);  // AIN2 LOW
+
+                    //右前轮向后
+                    // console.log('open 22 AIN1')
+                    // console.log('open 18 AIN2')
+                    rpio.open(18, rpio.OUTPUT, rpio.LOW); // AIN1 HIGH
+                    rpio.open(22, rpio.OUTPUT, rpio.HIGH);  // AIN2 LOW
+
+                    //左前轮向后
+                    // console.log('open 29 AIN1')
+                    // console.log('open 31 AIN2')
+                    rpio.open(31, rpio.OUTPUT, rpio.LOW); // AIN1 HIGH
+                    rpio.open(29, rpio.OUTPUT, rpio.HIGH);  // AIN2 LOW
+                }
+            }
+        }else{
+
+        }
     }
 
 }
