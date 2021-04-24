@@ -1,0 +1,30 @@
+{
+  "name": "raspberrysmartcardriver",
+  "version": "1.0.0",
+  "description": "树莓派小车驱动程序",
+  "main": "SmartCarDriver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xujialiang/RaspberrySmartCarDriver.git"
+  },
+  "keywords": [
+    "RaspberrySmartCar",
+    "RaspberrySmartCarDriver",
+    "SmartCar",
+    "SmartCarDriver",
+    "Raspberry"
+  ],
+  "author": "xujialiang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xujialiang/RaspberrySmartCarDriver/issues"
+  },
+  "homepage": "https://github.com/xujialiang/RaspberrySmartCarDriver#readme",
+  "dependencies": {
+    "ezpwmforraspberry": "^1.0.0",
+    "sbusuart": "^1.0.9"
+  }
+}
