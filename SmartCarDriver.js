@@ -30,20 +30,19 @@ class SmartCarDriver {
             // 通道8:SW4;       打开关闭啥？
             // 通道9:RV左;      云台左右
             // 通道10:RV右;     云台上下 
-            console.log('油门', status, channels[2], channels_c[2]);
+            console.log('油门', new Date(),status, channels[2], channels_c[2]);
 
-            that._processSpeedAndDirection(status, channels[2], channels_c[2]);
+            // that._processSpeedAndDirection(status, channels[2], channels_c[2]);
             
         });
     }
 
     _processSpeedAndDirection(status, channel_origin, channel_convert){
-        if(channel_origin == 0 || channel_convert == 0) {
+        if(channel_origin == 0 || channel_convert == 0 || channel_origin == 200) {
             return;
         }
         if(status==0){
-            const channel_convert_fixed = channel_convert.toFixed(2);
-            const diff = channel_convert_fixed - 0.5;
+            const diff = channel_convert - 0.5;
             const diff_abs = Math.abs(diff);
             if(diff_abs>0.1){
                 // 控制速度
