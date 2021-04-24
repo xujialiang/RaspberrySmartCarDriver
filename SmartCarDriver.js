@@ -28,7 +28,7 @@ class SmartCarDriver {
             // 通道8:SW4;       打开关闭啥？
             // 通道9:RV左;      云台左右
             // 通道10:RV右;     云台上下
-            
+            console.log(status, channels, channels_c);
 
         });
     }
