@@ -37,6 +37,9 @@ class SmartCarDriver {
     }
 
     _processSpeedAndDirection(status, channel_origin, channel_convert){
+        if(channel_origin == 0 && channel_convert == 0) {
+            return;
+        }
         if(status==0){
             const channel_convert_fixed = channel_convert.toFixed(2);
             const diff = channel_convert_fixed - 0.5;
