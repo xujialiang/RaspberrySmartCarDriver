@@ -50,7 +50,9 @@ class SmartCarDriver {
                 if(diff_abs > 0.5){
                     diff_abs = 0.5;
                 }
-                PWM.updatePWMByPercent(ezPWM.PWMPin.PIN12,diff_abs*2*100);
+                const percent = diff_abs*2*100;
+                console.log('percent', percent);
+                PWM.updatePWMByPercent(ezPWM.PWMPin.PIN12, percent);
 
                 // 控制方向
                 if(diff>0){
