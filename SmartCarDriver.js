@@ -17,6 +17,7 @@ class SmartCarDriver {
     }
 
     start(){
+        let that = this;
         SBUS.start('/dev/ttyAMA0', (status, channels, channels_c)=>{
             // 处理各个通道数据, 通过Promise异步处理
             // 通道1:右手左右;    控制左右方向
@@ -31,7 +32,7 @@ class SmartCarDriver {
             // 通道10:RV右;     云台上下 
             console.log('油门', status, channels[2], channels_c[2]);
 
-            _processSpeedAndDirection(status, channels[2], channels_c[2]);
+            that._processSpeedAndDirection(status, channels[2], channels_c[2]);
             
         });
     }
