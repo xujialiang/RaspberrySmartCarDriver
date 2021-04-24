@@ -12,7 +12,7 @@ class SmartCarDriver {
         // MC10遥控，行程最小200， 最大1800。
         SBUS.setupConvertParams(200, 1800);
 
-        // 用12号端口控制速度
+        // 用12号端口控制速度, 连接了T6612驱动模块上的PWM信号口，向它发送信号，控制速度
         PWM.openPWMByPercent(ezPWM.PWMPin.PIN12);
     }
 
@@ -38,7 +38,7 @@ class SmartCarDriver {
     }
 
     _processSpeedAndDirection(status, channel_origin, channel_convert){
-        if(channel_origin == 0 && channel_convert == 0) {
+        if(channel_origin == 0 || channel_convert == 0) {
             return;
         }
         if(status==0){
