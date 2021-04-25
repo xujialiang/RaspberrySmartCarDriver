@@ -5,8 +5,8 @@ const ezPWM = require('ezpwmforraspberry');
 const rpio = require('rpio');
 const SBUSUART = require('sbusuart')
 const SBUS = new SBUSUART();
-const MotorFront = ezTB6612();
-const MotorBack = ezTB6612();
+const MotorFront = new ezTB6612();
+const MotorBack = new ezTB6612();
 
 class SmartCarDriver {
 
@@ -45,7 +45,7 @@ class SmartCarDriver {
             // 通道10:RV右;     云台上下 
             console.log('油门', new Date(),status, channels[2], channels_c[2]);
 
-            // that._processSpeedAndDirection(status, channels[2], channels_c[2]);
+            that._processSpeedAndDirection(status, channels[2], channels_c[2]);
             
         });
     }
@@ -65,71 +65,20 @@ class SmartCarDriver {
                 const percent = parseInt(diff_abs*2*100);
                 console.log('percent', percent);
 
-                MotorFront.updateAllMotorSpeed(percent);
-                MotorBack.updateAllMotorSpeed(percent);
-                // PWM.updatePWMByPercent(ezPWM.PWMPin.PIN12, percent);
+                MotorFront.updateMotor1Speed(percent);
 
                 // 控制方向
                 if(diff>0){
                     console.log('向前');
                     MotorFront.doAllForward()
                     MotorBack.doAllForward()
-                    // // 向前开
-                    // //左后轮向前
-                    // // console.log('open 13 AIN1')
-                    // // console.log('open 11 AIN2')
-                    // rpio.open(13, rpio.OUTPUT, rpio.HIGH); // AIN1 HIGH
-                    // rpio.open(11, rpio.OUTPUT, rpio.LOW);  // AIN2 LOW
-
-                    // //右后轮向前
-                    // // console.log('open 15 AIN1')
-                    // // console.log('open 16 AIN2')
-                    // rpio.open(15, rpio.OUTPUT, rpio.HIGH); // AIN1 HIGH
-                    // rpio.open(16, rpio.OUTPUT, rpio.LOW);  // AIN2 LOW
-
-                    // //右前轮向前
-                    // // console.log('open 22 AIN1')
-                    // // console.log('open 18 AIN2')
-                    // rpio.open(18, rpio.OUTPUT, rpio.HIGH); // AIN1 HIGH
-                    // rpio.open(22, rpio.OUTPUT, rpio.LOW);  // AIN2 LOW
-
-                    // //左前轮向前
-                    // // console.log('open 29 AIN1')
-                    // // console.log('open 31 AIN2')
-                    // rpio.open(31, rpio.OUTPUT, rpio.HIGH); // AIN1 HIGH
-                    // rpio.open(29, rpio.OUTPUT, rpio.LOW);  // AIN2 LOW
                 }else{
                     console.log('向后');
                     MotorFront.doAllBackward()
                     MotorBack.doAllBackward()
-                    // // 向后开
-                    // //左后轮向后
-                    // // console.log('open 13 AIN1')
-                    // // console.log('open 11 AIN2')
-                    // rpio.open(13, rpio.OUTPUT, rpio.LOW); // AIN1 HIGH
-                    // rpio.open(11, rpio.OUTPUT, rpio.HIGH);  // AIN2 LOW
-
-                    // //右后轮向后
-                    // // console.log('open 15 AIN1')
-                    // // console.log('open 16 AIN2')
-                    // rpio.open(15, rpio.OUTPUT, rpio.LOW); // AIN1 HIGH
-                    // rpio.open(16, rpio.OUTPUT, rpio.HIGH);  // AIN2 LOW
-
-                    // //右前轮向后
-                    // // console.log('open 22 AIN1')
-                    // // console.log('open 18 AIN2')
-                    // rpio.open(18, rpio.OUTPUT, rpio.LOW); // AIN1 HIGH
-                    // rpio.open(22, rpio.OUTPUT, rpio.HIGH);  // AIN2 LOW
-
-                    // //左前轮向后
-                    // // console.log('open 29 AIN1')
-                    // // console.log('open 31 AIN2')
-                    // rpio.open(31, rpio.OUTPUT, rpio.LOW); // AIN1 HIGH
-                    // rpio.open(29, rpio.OUTPUT, rpio.HIGH);  // AIN2 LOW
                 }
             }else{
-                MotorFront.updateAllMotorSpeed(percent);
-                MotorBack.updateAllMotorSpeed(percent);
+                MotorFront.updateAllMotorSpeed(0);
             }
         }else{
 
