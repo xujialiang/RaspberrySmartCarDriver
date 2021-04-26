@@ -64,9 +64,10 @@ class SmartCarDriver {
                 if(diff_leftright_abs>=0.25){
                     // 控制左右方向
                     if(diff_leftright>0){
-                        motorMgr.doLeft();
-                    }else{
                         motorMgr.doRight();
+                    }else{
+                        motorMgr.doLeft();
+                        
                     }
                 }else{
                     // 控制前后方向
