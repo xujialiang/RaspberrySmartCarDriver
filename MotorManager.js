@@ -57,21 +57,53 @@ class MotorManager{
 
     // 麦克纳母轮
     doLeft(){
-
+        // 左前 向后 右前 向前
+        // 左后 向前 右后 向后
+        this.frontLeft.doBackward();
+        this.frontRight.doForward();
+        this.backLeft.doForward();
+        this.backRight.doBackward();
     }
 
     // 麦克纳母轮
     doRight(){
-
+        // 左前 向前 右前 向后
+        // 左后 向后 右后 向前
+        this.frontLeft.doForward();
+        this.frontRight.doBackward();
+        this.backLeft.doBackward();
+        this.backRight.doForward();
     }
 
     // 麦克纳母轮 左转
     turnLeft(){
-
+        // 左前 向后 右前 向前
+        // 左后 向后 右后 向前
     }
 
     // 麦克纳母轮 右转
     turnRight(){
+        // 左前 向前 右前 向后
+        // 左后 向前 右后 向后
+    }
+
+    // 右前方
+    doRightFront(){
+
+    }
+
+    // 右前方
+    doLeftFront(){
+
+    }
+
+    // 右后方
+    doRightBack(){
+
+    }
+
+    // 左后方
+    doRightBack(){
 
     }
 }
