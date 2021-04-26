@@ -126,7 +126,7 @@ class MotorManager{
     }
 
     // 左后方
-    doRightBack(){
+    doLeftBack(){
         // 左前 向后 右前 停止
         // 左后 停止 右后 向后
         this.frontLeft.doBackward();
