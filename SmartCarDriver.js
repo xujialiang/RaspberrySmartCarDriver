@@ -63,10 +63,11 @@ class SmartCarDriver {
                 const diff_leftright_lefthand = channels_convert[3] - 0.5;
                 var diff_leftright_lefthand_abs = Math.abs(diff_leftright_lefthand);
 
-                const sw4val = channels_convert[3];
+                const sw4val = parseInt(channels_convert[3]);
                 if(diff_leftright_lefthand_abs>=0.25){
                     console.log('SW4', new Date(),status, channels_origin[7], channels_convert[7]);
                     if(sw4val>0){
+                        console.log('sw4val>0');
                         // sw4val 开关 打开， 左手遥控智能左右旋转
                         if(diff_leftright_lefthand>0){
                             motorMgr.turnRight();
@@ -75,6 +76,7 @@ class SmartCarDriver {
                         }
                         return;
                     }else{
+                        console.log('sw4val<=0');
                         // sw4val 开关 关闭， 左手遥感控制左前 右前 左后 右后方向
                         if(diff>0){
                             if(diff_leftright_lefthand>0){
