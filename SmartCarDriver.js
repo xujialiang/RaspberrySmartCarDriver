@@ -49,7 +49,7 @@ class SmartCarDriver {
         }
         if(status==0){
             const diff = channel_convert - 0.5;
-            const diff_abs = Math.abs(diff);
+            var diff_abs = Math.abs(diff);
             if(diff_abs>0.1){
                 // 控制速度
                 if(diff_abs > 0.5){
