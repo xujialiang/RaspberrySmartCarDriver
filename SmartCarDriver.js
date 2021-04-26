@@ -1,32 +1,25 @@
 // 在树莓派上，启动SmartCarDriver。 建议加入系统自启动。 需要用root权限，或者把pi用户加入到gpio用户组。
 
-const ezTB6612 = require('eztb6612')
 const ezPWM = require('ezpwmforraspberry');
 const rpio = require('rpio');
 const SBUSUART = require('sbusuart')
 const SBUS = new SBUSUART();
-const MotorFront = new ezTB6612();
-const MotorBack = new ezTB6612();
+const MotorManager = require('MotorManger');
+const motorMgr = new MotorManager();
+const ezPWM = require('ezpwmforraspberry');
 
 class SmartCarDriver {
 
     constructor(){
         // MC10遥控，行程最小200， 最大1800。
         SBUS.setupConvertParams(200, 1800);
-
-        // 用12号端口控制速度, 连接了T6612驱动模块上的PWM信号口，向它发送信号，控制速度。
-        MotorFront.setupMotor1SpeedConfig(ezPWM.PWMPin.PIN12);
-        MotorFront.setupMotor2SpeedConfig(ezPWM.PWMPin.PIN12);
-        // MotorFront和Motorback的pwm都连了PIN12，小车四个轮子速度一致。
-        MotorBack.setupMotor1SpeedConfig(ezPWM.PWMPin.PIN12);
-        MotorBack.setupMotor2SpeedConfig(ezPWM.PWMPin.PIN12);
-
+        
         // 定义轮子
-        MotorFront.setupMotor1Config(18, 22); //右前轮
-        MotorFront.setupMotor2Config(31, 29); //左前轮
-
-        MotorBack.setupMotor1Config(15, 16); //右后轮
-        MotorBack.setupMotor2Config(13, 11); //左后轮
+        this.rightFront = motorMgr.motorFactory(18, 22, ezPWM.PWMPin.PIN12); //右前轮
+        this.leftFront = motorMgr.motorFactory(31, 29, ezPWM.PWMPin.PIN12);  //左前轮
+        this.rightBack = motorMgr.motorFactory(15, 16, ezPWM.PWMPin.PIN12);  //右后轮
+        this.leftBack = motorMgr.motorFactory(13, 11, ezPWM.PWMPin.PIN12);   //左后轮
+        motorMgr.setupMotors(this.leftFront, this.rightFront, this.leftBack, this.rightBack); // 设置前后左右轮子
     }
 
     start(){
@@ -65,20 +58,18 @@ class SmartCarDriver {
                 const percent = parseInt(diff_abs*2*100);
                 console.log('percent', percent);
 
-                MotorFront.updateMotor1Speed(percent);
+                motorMgr.updateSpeed(percent, this.leftFront);
 
                 // 控制方向
                 if(diff>0){
                     console.log('向前');
-                    MotorFront.doAllForward()
-                    MotorBack.doAllForward()
+                    motorMgr.doForward();
                 }else{
                     console.log('向后');
-                    MotorFront.doAllBackward()
-                    MotorBack.doAllBackward()
+                    motorMgr.doForward();
                 }
             }else{
-                MotorFront.updateAllMotorSpeed(0);
+                motorMgr.updateSpeed(0);
             }
         }else{
 
