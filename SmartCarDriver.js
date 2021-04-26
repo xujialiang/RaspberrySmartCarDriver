@@ -66,8 +66,10 @@ class SmartCarDriver {
                 if(diff_leftright_lefthand_abs>=0.25){
                     if(diff_leftright_lefthand>0){
                         motorMgr.turnRight();
+                        return;
                     }else{
                         motorMgr.turnLeft();
+                        return;
                     }
                 }
 
