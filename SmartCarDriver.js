@@ -41,8 +41,8 @@ class SmartCarDriver {
             // 通道8:SW4;       打开关闭啥？
             // 通道9:RV左;      云台左右
             // 通道10:RV右;     云台上下 
-        console.log('油门', new Date(),status, channels[2], channels_c[2]);
-        console.log('左右', new Date(),status, channels[0], channels_c[0]);
+        console.log('油门', new Date(),status, channels_origin[2], channels_convert[2]);
+        console.log('左右', new Date(),status, channels_origin[0], channels_convert[0]);
         if(channels_origin[2] == 0 || channels_convert[2] == 0 || channels_origin[2] == 200) {
             return;
         }
