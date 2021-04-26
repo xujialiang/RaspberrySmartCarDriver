@@ -4,9 +4,8 @@ const ezPWM = require('ezpwmforraspberry');
 const rpio = require('rpio');
 const SBUSUART = require('sbusuart')
 const SBUS = new SBUSUART();
-const MotorManager = require('MotorManger');
+const MotorManager = require('./MotorManager.js');
 const motorMgr = new MotorManager();
-const ezPWM = require('ezpwmforraspberry');
 
 class SmartCarDriver {
 
@@ -20,6 +19,7 @@ class SmartCarDriver {
         this.rightBack = motorMgr.motorFactory(15, 16, ezPWM.PWMPin.PIN12);  //右后轮
         this.leftBack = motorMgr.motorFactory(13, 11, ezPWM.PWMPin.PIN12);   //左后轮
         motorMgr.setupMotors(this.leftFront, this.rightFront, this.leftBack, this.rightBack); // 设置前后左右轮子
+        console.log('motors', motorMgr.getAllMotors());
     }
 
     start(){

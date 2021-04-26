@@ -4,8 +4,9 @@ const ezPWM = require('ezpwmforraspberry');
 class MotorManager{
 
     motorFactory(motorpin1,motorpin2,motorpwm){
-        const motor = new ezTB6612(motorpin1, motorpin2, motorpwm);
-        return motor[0];
+        let motor = new ezTB6612(motorpin1, motorpin2, motorpwm);
+        console.log('MotorManager-motorFactory', motor);
+        return motor.getAllMotors()[0];
     }
 
     setupMotors(frontLeft, frontRight, backLeft, backRight){
