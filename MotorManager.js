@@ -97,22 +97,42 @@ class MotorManager{
 
     // 右前方
     doRightFront(){
-
+        // 左前 向前 右前 停止
+        // 左后 停止 右后 向前
+        this.frontLeft.doForward();
+        this.frontRight.doStop();
+        this.backLeft.doStop();
+        this.backRight.doForward();
     }
 
-    // 右前方
+    // 左前方
     doLeftFront(){
-
+        // 左前 停止 右前 向前
+        // 左后 向前 右后 停止
+        this.frontLeft.doStop();
+        this.frontRight.doForward();
+        this.backLeft.doForward();
+        this.backRight.doStop();
     }
 
     // 右后方
     doRightBack(){
-
+        // 左前 停止 右前 向后
+        // 左后 向后 右后 停止
+        this.frontLeft.doStop();
+        this.frontRight.doBackward();
+        this.backLeft.doBackward();
+        this.backRight.doStop();
     }
 
     // 左后方
     doRightBack(){
-
+        // 左前 向后 右前 停止
+        // 左后 停止 右后 向后
+        this.frontLeft.doBackward();
+        this.frontRight.doStop();
+        this.backLeft.doStop();
+        this.backRight.doBackward();
     }
 }
 
