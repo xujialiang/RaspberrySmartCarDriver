@@ -79,17 +79,21 @@ class SmartCarDriver {
                         if(diff>0){
                             if(diff_leftright_lefthand>0){
                                 //右前
+                                console.log('右前');
                                 motorMgr.doRightFront();
                             }else{
                                 //左前
+                                console.log('左前');
                                 motorMgr.doLeftFront();
                             }
                         }else{
                             if(diff_leftright_lefthand>0){
                                 //右后
+                                console.log('右后');
                                 motorMgr.doRightBack();
                             }else{
                                 //左后
+                                console.log('左后');
                                 motorMgr.doLeftBack();
                             }
                         }
