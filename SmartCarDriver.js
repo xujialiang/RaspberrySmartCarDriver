@@ -47,7 +47,7 @@ class SmartCarDriver {
             return;
         }
         if(status==0){
-            const diff = channel_convert[2] - 0.5;
+            const diff = channels_convert[2] - 0.5;
             var diff_abs = Math.abs(diff);
             if(diff_abs>=0.1){
                 // 控制油门速度
@@ -59,7 +59,7 @@ class SmartCarDriver {
                 motorMgr.updateSpeed(percent, this.leftFront);
 
                 // 判断是否有左右, 如果是左右，优先级高于前后
-                const diff_leftright = channel_convert[0] - 0.5;
+                const diff_leftright = channels_convert[0] - 0.5;
                 var diff_leftright_abs = Math.abs(diff_leftright);
                 if(diff_leftright_abs>=0.25){
                     // 控制左右方向
