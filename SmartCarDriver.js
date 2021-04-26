@@ -66,7 +66,7 @@ class SmartCarDriver {
                     motorMgr.doForward();
                 }else{
                     console.log('向后');
-                    motorMgr.doForward();
+                    motorMgr.doBackward();
                 }
             }else{
                 motorMgr.updateSpeed(0);
