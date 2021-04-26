@@ -43,7 +43,6 @@ class SmartCarDriver {
             // 通道10:RV右;     云台上下 
         console.log('油门', new Date(),status, channels_origin[2], channels_convert[2]);
         console.log('右手左右', new Date(),status, channels_origin[0], channels_convert[0]);
-        console.log('SW4', new Date(),status, channels_origin[7], channels_convert[7]);
         console.log('左手手左右', new Date(),status, channels_origin[3], channels_convert[3]);
         if(channels_origin[2] == 0 || channels_convert[2] == 0 || channels_origin[2] == 200) {
             return;
@@ -66,6 +65,7 @@ class SmartCarDriver {
 
                 const sw4val = channels_convert[3];
                 if(diff_leftright_lefthand_abs>=0.25){
+                    console.log('SW4', new Date(),status, channels_origin[7], channels_convert[7]);
                     if(sw4val>0){
                         // sw4val 开关 打开， 左手遥控智能左右旋转
                         if(diff_leftright_lefthand>0){
