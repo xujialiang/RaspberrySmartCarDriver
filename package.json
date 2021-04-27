@@ -24,8 +24,9 @@
   },
   "homepage": "https://github.com/xujialiang/RaspberrySmartCarDriver#readme",
   "dependencies": {
+    "ezmotor": "^1.0.0",
     "ezpwmforraspberry": "^1.0.0",
-    "eztb6612": "^1.0.6",
+    "eztb6612": "^1.0.7",
     "sbusuart": "^1.0.9"
   }
 }

@@ -4,7 +4,7 @@ const ezPWM = require('ezpwmforraspberry');
 const rpio = require('rpio');
 const SBUSUART = require('sbusuart')
 const SBUS = new SBUSUART();
-const MotorManager = require('./MotorManager.js');
+const MotorManager = require('ezmotor');
 const motorMgr = new MotorManager();
 
 class SmartCarDriver {
@@ -60,7 +60,7 @@ class SmartCarDriver {
                 console.log('percent', percent);
                 motorMgr.updateSpeed(percent, this.leftFront);
 
-                //向右转 向左转
+                //向右转 向左转 或者斜着方向。 左遥感优先级高于右遥感
                 const diff_leftright_lefthand = channels_convert[3] - 0.5;
                 var diff_leftright_lefthand_abs = Math.abs(diff_leftright_lefthand);
 
