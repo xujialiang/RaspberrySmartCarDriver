@@ -27,7 +27,7 @@
     "ezmotor": "^1.0.0",
     "ezpwmforraspberry": "^1.0.0",
     "eztb6612": "^1.0.7",
-    "ezx750ups": "^1.0.0",
+    "ezx750ups": "^1.0.3",
     "sbusuart": "^1.0.9"
   }
 }

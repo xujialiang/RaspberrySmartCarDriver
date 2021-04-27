@@ -7,7 +7,7 @@ const SBUS = new SBUSUART();
 const MotorManager = require('ezmotor');
 const motorMgr = new MotorManager();
 const EZX750 = require('ezx750ups');
-let ezX750Mgr = EZX750(0x36);
+let ezX750Mgr = new EZX750(0x36);
 
 class SmartCarDriver {
 
