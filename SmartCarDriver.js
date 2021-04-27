@@ -6,6 +6,8 @@ const SBUSUART = require('sbusuart')
 const SBUS = new SBUSUART();
 const MotorManager = require('ezmotor');
 const motorMgr = new MotorManager();
+const EZX750 = require('ezx750ups');
+let ezX750Mgr = EZX750(0x36);
 
 class SmartCarDriver {
 
@@ -20,6 +22,15 @@ class SmartCarDriver {
         this.leftBack = motorMgr.motorFactory(13, 11, ezPWM.PWMPin.PIN12);   //左后轮
         motorMgr.setupMotors(this.leftFront, this.rightFront, this.leftBack, this.rightBack); // 设置前后左右轮子
         console.log('motors', motorMgr.getAllMotors());
+    }
+
+    _getStatus(){
+        let vol = ezX750Mgr.getVoltage();
+        console.log('vol', vol);
+
+
+        let cap = ezX750Mgr.getCapacity();
+        console.log('cap', cap);
     }
 
     start(){
